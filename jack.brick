@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# script to turn on both jack and alsa_out for the realtek sound card
+
+# kill pulseaudio, start jack
+pkill pulseaudio
+qjackctl&
+
+# find where script is located
+DIR=$(cd $(dirname "$0"); pwd)
+
+# start realtek card
+$DIR/realtek.brick
+
+# restart pulseaudio to sync with jack
+pulseaudio
